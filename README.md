@@ -27,7 +27,8 @@ I highly recommend you write your own trainner when using pynotebook!
 
 
 ## Reference
-[1][Deep Reinforcement Learning: Pong from Pixels][http://karpathy.github.io/2016/05/31/rl/]
+[1][Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/)
 
-[2][莫凡Policy Gradient][https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/5-1-policy-gradient-softmax1/]
-[3][PyTorch][http://pytorch.org/]
+[2][莫凡Policy Gradient](https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/5-1-policy-gradient-softmax1/)
+
+[3][PyTorch](http://pytorch.org/)
