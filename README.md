@@ -20,6 +20,8 @@ You can replace the model you want in the **Model** folder.
 
 If you don't want to use any ML model in this homework, then just put your discrete decision method in **Model** is also fine. 
 
+Updata 3/9 : Add **DQN** Model in **Model** Folder, but I'm not sure it can get high revenue...
+
 ## Trainer 
 Trainer is used to contain all the contents used in training.
 
