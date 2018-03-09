@@ -11,20 +11,23 @@ action_size = 3
 
 class Policy(nn.Module):
     def __init__(self, batch_size=20):
+        """
+            Pass
+        """
         super(Policy, self).__init__()
         self.hidden_size = hidden_size
-#         self.linear1 = nn.Linear(embedding_size, hidden_size)
-#         self.linear2 = nn.Linear(hidden_size, state_number)
         self.income_tran_mat = nn.Linear(1, embedding_size)
         self.status_embed_mat = nn.Embedding(3, embedding_size)       
         self.four_feature_transform = nn.Linear(4, embedding_size)
         self.Policy = nn.Linear(embedding_size * 3, action_size)
 
+        self.Dropout = nn.Dropout(p = 0.5 )
+        
         self.action_pool = []
         self.reward_pool = []
         self.state_pool = []
 
-        self.reward_discount_factor = 0.99
+        self.reward_discount_factor = 0.9999
 
     def attenion():
         pass
@@ -35,12 +38,10 @@ class Policy(nn.Module):
         income_emdeds = self.income_tran_mat(income).view(1, embedding_size)
         status_embeds = self.status_embed_mat(status)
         four_embeds = self.four_feature_transform(four).view(1, embedding_size)
-        # print(self.four_feature_transform.weight)
-        # print("status_embeds size : ",status_embeds.size())
-        # print("income_emdeds size : ",income_emdeds.size())
-        # print("four_embeds : ", four_embeds.size())
         total_embeds  = torch.cat([four_embeds, status_embeds, income_emdeds], dim=1)
-        # print(total_embeds.size())
+
+        # total_embeds = self.Dropout(total_embeds)
+        
         action = F.softmax(self.Policy(total_embeds))		
         self.state_pool.append(total_embeds)
         self.action_pool.append(action)
@@ -64,17 +65,20 @@ class Policy(nn.Module):
         # reward_mean = np.mean(self.reward_pool)
         # reward_std = np.std(self.reward_pool)   
         # for i, reward in enumerate(self.reward_pool):
-        #         self.reward_pool[i] = (self.reward_pool[i] - reward_mean) / reward_std
+        #         self.reward_pool[i] = (self.reward_pool[i]) / reward_std
         
         # Discount the reward in reverse chronological order
         
         count = 0
         for i, reward in reversed(list(enumerate(self.reward_pool))):
             self.reward_pool[i] *= pow(self.reward_discount_factor, count)
-            count +=1
+            
+            count += 1
 
         optimizer.zero_grad()
         for i, reward in enumerate(self.reward_pool):
+            optimizer.zero_grad()
+
             reward = Variable(torch.FloatTensor([reward]))
             # mask = torch.bernoulli(self.action_pool[i])
 

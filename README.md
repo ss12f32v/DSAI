@@ -14,7 +14,7 @@ Calling ```reset``` to reset all the parameter in Environment.
 
 ## Model 
 I already finish the Model using **Policy Gradient**.
-I'm not sure is right, but I will try to validate the model and improve the robustness of the model.
+I'm not sure is right, but I will try to validate the model and improve the robustness of it .
 
 You can replace the model you want in the **Model** folder. 
 
