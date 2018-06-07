@@ -1,1 +1,3 @@
-*,pt
+*.ipynb_checkpoints
+*.vscode
+*.pt
